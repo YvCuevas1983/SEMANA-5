@@ -1,0 +1,59 @@
+﻿using System;
+using System.Collections.Generic;
+
+public class ParqueDiversiones
+{
+    private Queue<string> colaDeEspera;
+
+    public ParqueDiversiones()
+    {
+        colaDeEspera = new Queue<string>();
+    }
+
+    public void RegistrarPersona(string nombre)
+    {
+        colaDeEspera.Enqueue(nombre);
+        Console.WriteLine($"{nombre} ha sido registrado para la atracción.");
+    }
+
+    public void AsignarAsiento()
+    {
+        if (colaDeEspera.Count > 0)
+        {
+            string persona = colaDeEspera.Dequeue();
+            Console.WriteLine($"{persona} ha subido a la atracción.");
+        }
+        else
+        {
+            Console.WriteLine("No hay personas en la cola.");
+        }
+    }
+
+    public void VerCola()
+    {
+        Console.WriteLine("Estado actual de la cola:");
+        foreach (var persona in colaDeEspera)
+        {
+            Console.WriteLine(persona);
+        }
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        ParqueDiversiones parque = new ParqueDiversiones();
+
+        parque.RegistrarPersona("Juan");
+        parque.RegistrarPersona("Ana");
+        parque.RegistrarPersona("Pedro");
+
+        parque.VerCola();
+
+        parque.AsignarAsiento();
+        parque.AsignarAsiento();
+
+        parque.VerCola();
+    }
+}
